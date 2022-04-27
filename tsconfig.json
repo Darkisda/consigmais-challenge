@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@models/*": ["src/domain/models/*"],
-      "@usecase/*": ["src/domain/usecases/*"]
+      "@usecase/*": ["src/domain/usecases/*"],
+      "@shared/*": ["src/shared/*"]
     }
   }
 }
