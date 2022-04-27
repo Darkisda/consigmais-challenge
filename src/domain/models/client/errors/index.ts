@@ -1,1 +1,3 @@
-export * from './create-client-error';
+import { CreateClientError } from './create-client-error';
+
+export type ClientErrors = CreateClientError;
