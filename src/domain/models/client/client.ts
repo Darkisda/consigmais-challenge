@@ -1,6 +1,7 @@
 import { AccountBank } from '../accountBank';
 
 export type Client = {
+  id: string;
   fullName: string;
   birthDate: string;
   cpf: string;
