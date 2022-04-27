@@ -1,23 +1,28 @@
-import { Client, ClientErrors } from '@models/client';
-import { Either } from '@shared/either';
+import {
+  Client,
+  ClientErrors,
+  ClientRepository,
+  CreateClientParams,
+} from '@models/client';
+import {
+  createLeftSide,
+  createRightSide,
+  Either,
+  isLeft,
+} from '@shared/either';
 
-export interface CreateClient {
-  create(params: Params): Promise<Either<ClientErrors, Client>>;
+export class CreateClient {
+  constructor(private readonly repository: ClientRepository) {}
+
+  async exec(
+    params: CreateClientParams,
+  ): Promise<Either<ClientErrors, Client>> {
+    const result = await this.repository.createClient(params);
+
+    if (isLeft(result)) {
+      return createLeftSide(result.left);
+    }
+
+    return createRightSide(result.right);
+  }
 }
-
-type Params = {
-  fullName: string;
-  birthDate: string;
-  cpf: string;
-  telNumber: string;
-  cep: string;
-  rg: string;
-  issuingAgency: string;
-  ufDispatch: string;
-  streetName: string;
-  houseNumber: number;
-  state: string;
-  neighborhood: string;
-  city: string;
-  motherName: string;
-};
