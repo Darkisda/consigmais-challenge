@@ -1,12 +1,21 @@
 import { createConnection, Connection } from 'mysql2/promise';
-import { DBConnectionConfig, DBHelper } from '@adapters/db';
-import { createLeftSide, createRightSide, Either } from '@shared/either';
+import { DBConnectionConfig } from '@adapters/db';
+import { createLeftSide, createRightSide, Either } from '../../shared/either';
 
-export class MySQLHelper implements DBHelper {
-  private connection: Connection = undefined;
+export class MySQLHelper {
+  private static connection: Connection = undefined;
 
-  async connect(config: DBConnectionConfig): Promise<Either<string, void>> {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  private constructor() {}
+
+  static async connect(
+    config: DBConnectionConfig,
+  ): Promise<Either<string, string>> {
     const { database, host, password, user } = config;
+
+    if (this.connection) {
+      return;
+    }
 
     try {
       this.connection = await createConnection({
@@ -14,16 +23,19 @@ export class MySQLHelper implements DBHelper {
         database,
         password,
         user,
+        port: 3306,
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0,
       });
+
+      return createRightSide('Connected');
     } catch (error) {
       return createLeftSide(error.message);
     }
   }
 
-  async getConnection(): Promise<Either<string, Connection>> {
+  static async getConnection(): Promise<Either<string, Connection>> {
     if (this.connection) {
       return createRightSide(this.connection);
     }
