@@ -20,7 +20,8 @@
     "paths": {
       "@models/*": ["src/domain/models/*"],
       "@usecase/*": ["src/domain/usecases/*"],
-      "@shared/*": ["src/shared/*"]
+      "@shared/*": ["src/shared/*"],
+      "@adapters/*": ["src/datapters/*"]
     }
   }
 }
