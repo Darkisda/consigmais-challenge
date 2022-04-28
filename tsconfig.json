@@ -21,7 +21,8 @@
       "@models/*": ["src/domain/models/*"],
       "@usecase/*": ["src/domain/usecases/*"],
       "@shared/*": ["src/shared/*"],
-      "@adapters/*": ["src/adapters/*"]
+      "@adapters/*": ["src/adapters/*"],
+      "@infra/*": ["src/infra/*"]
     }
   }
 }
