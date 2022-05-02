@@ -1,2 +1,1 @@
-export * from './clients';
-export * from './mysql-helper-connection';
+export * from './knex-helper-connection';
