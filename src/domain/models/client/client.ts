@@ -7,7 +7,7 @@ export type Client = {
   cpf: string;
   telNumber: string;
   cep: string;
-  accountBank: AccountBank;
+  accountBank?: AccountBank;
   rg: string;
   issuingAgency: string;
   ufDispatch: string;
