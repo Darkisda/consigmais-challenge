@@ -8,7 +8,8 @@ export async function up(knex: Knex) {
     table.string('cpf').notNullable();
     table.string('telNumber').notNullable();
     table.string('cep').notNullable();
-    table.string('accountBank').notNullable();
+    table.string('houseNumber').notNullable();
+    table.string('accountBank').nullable();
     table.string('rg').notNullable();
     table.string('issuingAgency').notNullable();
     table.string('ufDispatch').notNullable();

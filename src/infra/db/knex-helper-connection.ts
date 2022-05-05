@@ -12,22 +12,12 @@ export class KnexConnection {
 
     try {
       return knex<Client, Client>({
-        client: 'mysql',
+        client: 'mysql2',
         connection: {
           host,
           database,
           password,
           user,
-        },
-        migrations: {
-          tableName: 'knex_migrations',
-          directory: path.resolve(
-            __dirname,
-            'src',
-            'infra',
-            'db',
-            'migrations',
-          ),
         },
         useNullAsDefault: true,
       });

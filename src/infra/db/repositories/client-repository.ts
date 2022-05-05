@@ -15,10 +15,10 @@ export class ClientRepositoryImp implements ClientRepository {
     params: CreateClientParams,
   ): Promise<Either<ClientErrors, Client>> {
     const conn = await KnexConnection.connectionWithClientsTable({
-      database: process.env.MYSQL_DATABASE,
-      host: process.env.MYSQL_HOST,
-      password: process.env.MYSQL_PASSWORD,
-      user: process.env.MYSQL_USER,
+      database: 'consigmais',
+      host: 'localhost',
+      password: 'admin',
+      user: 'admin',
     });
 
     try {
@@ -29,7 +29,7 @@ export class ClientRepositoryImp implements ClientRepository {
         ...params,
       };
 
-      const clientCreated = await conn.insert<Client>(client);
+      const clientCreated = await conn('clients').insert<Client>(client);
 
       return createRightSide(clientCreated);
     } catch (error) {
