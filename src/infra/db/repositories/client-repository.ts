@@ -10,6 +10,20 @@ import { KnexConnection } from '../knex-helper-connection';
 
 export class ClientRepositoryImp implements ClientRepository {
   constructor(private readonly uuidGenerator: GenerateUniqueIDProtocol) {}
+  async findAll(): Promise<Client[]> {
+    const conn = await KnexConnection.connectionWithClientsTable({
+      database: 'consigmais',
+      host: 'localhost',
+      password: 'admin',
+      user: 'admin',
+    });
+
+    try {
+      const clients = await conn('clients').select('*');
+
+      return clients;
+    } catch (error) {}
+  }
 
   async createClient(
     params: CreateClientParams,

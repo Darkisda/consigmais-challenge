@@ -7,6 +7,9 @@ import { CreateClient } from '@usecase/create-client';
 export class ClientsService {
   constructor(private readonly repository: ClientsRepository) {}
 
+  async findAll() {
+    return await this.repository.findAll();
+  }
   async registerClient(params: CreateClientParams) {
     const useCase = new CreateClient(this.repository);
     return await useCase.exec(params);

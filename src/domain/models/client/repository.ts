@@ -3,6 +3,7 @@ import { Client } from './client';
 import { ClientErrors } from './errors';
 
 export interface ClientRepository {
+  findAll(): Promise<Client[]>;
   createClient(
     params: CreateClientParams,
   ): Promise<Either<ClientErrors, Client>>;
